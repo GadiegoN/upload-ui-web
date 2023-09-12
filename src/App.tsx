@@ -1,4 +1,5 @@
-import { FileVideo, Github, Upload, Wand2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { FileVideo, Github, Moon, Sun, Upload, Wand2 } from "lucide-react";
 import { Button } from "./components/ui/button";
 import { Separator } from "./components/ui/separator";
 import { Textarea } from "./components/ui/textarea";
@@ -7,6 +8,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Slider } from "./components/ui/slider";
 
 export function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("light");
+    } else {
+      document.body.classList.remove("light");
+    }
+  }, [darkMode]);
+
   return (
     <div className="min-h-screen flex flex-col">
       <div className="px-6 py-3 flex items-center justify-between border-b">
@@ -24,6 +35,11 @@ export function App() {
             Github
           </Button>
         </div>
+
+        {darkMode == true ? 
+          <Button onClick={() => setDarkMode(!darkMode)}>Dark Mode <Moon className="h4 w-4 ml-2" /></Button> :
+          <Button onClick={() => setDarkMode(!darkMode)}>Light Mode <Sun className="h4 w-4 ml-2" /> </Button>
+        }
       </div>
 
       <main className="flex-1 p-6 flex gap-6">
